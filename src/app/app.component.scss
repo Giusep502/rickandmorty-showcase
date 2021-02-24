@@ -1,0 +1,32 @@
+@import "~src/styles/includes.scss";
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  .app-title {
+    flex-shrink: 0;
+    text-align: center;
+    padding: 24px;
+  }
+  .app-body {
+    flex-grow: 1;
+    background-color: #eee;
+  }
+  .app-footer {
+    text-align: center;
+    padding: 16px;
+    > span {
+      font-weight: bold;
+      color: black;
+    }
+  }
+}
+
+@include media-query-gt-md() {
+  .app-container {
+    .app-title {
+      padding: 32px;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+@mixin media-query-gt-xs() {
+  @media screen and (min-width: 600px) {
+    @content;
+  }
+}
+
+@mixin media-query-gt-sm() {
+  @media screen and (min-width: 960px) {
+    @content;
+  }
+}
+
+@mixin media-query-gt-md() {
+  @media screen and (min-width: 1280px) {
+    @content;
+  }
+}
+
+@mixin row-grid($columns, $gap: 16px) {
+  margin-right: -#{$gap};
+  margin-bottom: -#{$gap};
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  > * {
+    width: #{100% / $columns};
+    padding-right: $gap;
+    margin-bottom: $gap;
+  }
+}

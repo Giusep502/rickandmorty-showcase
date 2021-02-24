@@ -1,0 +1,16 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+    font-size: 1.5em;
+    @include media-query-gt-md() {
+        font-size: 2.5em;  
+    }
+}
+
+.caption {
+    font-size: 0.8rem;
+    color: #333;
+}
+
