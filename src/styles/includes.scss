@@ -16,15 +16,26 @@
   }
 }
 
+@mixin media-query-gt-lg() {
+  @media screen and (min-width: 1920px) {
+    @content;
+  }
+}
+
 @mixin row-grid($columns, $gap: 16px) {
   margin-right: -#{$gap};
   margin-bottom: -#{$gap};
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   > * {
     width: #{100% / $columns};
     padding-right: $gap;
     margin-bottom: $gap;
+  }
+}
+
+@mixin row-grid-col-override($columns) {
+  > * {
+    width: #{100% / $columns};
   }
 }
