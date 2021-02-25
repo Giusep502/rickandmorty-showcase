@@ -2,13 +2,15 @@ export type CharacterStatus = 'Alive' | 'Dead' | 'unknown';
 
 export type CharacterGender = 'Female' | 'Male' | 'Genderless' | 'unknown';
 
+export interface Infos {
+  count: number;
+  pages: number;
+  next: string;
+  prev: string;
+}
+
 export interface DefaultResponse<T> {
-  info: {
-    count: number;
-    pages: number;
-    next: string;
-    prev: string;
-  };
+  info: Infos;
   results: T[];
 }
 

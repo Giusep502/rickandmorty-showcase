@@ -1,10 +1,11 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import {
   Character,
   DefaultResponse,
   Episode,
+  Location,
 } from 'src/app/shared/models/rick-api.models';
 import { environment } from 'src/environments/environment';
 
