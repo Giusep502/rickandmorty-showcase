@@ -1,0 +1,39 @@
+@import "~src/styles/includes.scss";
+
+.character-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: $default-radius;
+  overflow: hidden;
+  background-color: $grey-1;
+  max-width: 315px;
+
+  .image {
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    max-height: 200px;
+    img {
+      flex-grow: 1;
+    }
+  }
+  .character-info {
+    padding: $default-item-padding;
+    .info {
+      display: flex;
+      justify-content: space-between;
+      .info-label {
+        color: $grey-2;
+      }
+      .info-value {
+        text-align: right;
+        padding-left: $default-text-padding;
+        color: $white;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}

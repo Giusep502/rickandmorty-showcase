@@ -1,1 +1,8 @@
-<pre> {{ characters$ | async | json }}</pre>
+<div class="character-list-page">
+  <div class="character-list" *ngIf="characters$ | async as characters">
+    <app-character-info
+      *ngFor="let character of characters"
+      [character]="character"
+    ></app-character-info>
+  </div>
+</div>

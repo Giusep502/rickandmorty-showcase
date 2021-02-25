@@ -1,1 +1,27 @@
-<p>character-info works!</p>
+<div class="character-card">
+  <div *ngIf="character.image" class="image">
+    <img loading="lazy" [src]="character.image" />
+  </div>
+  <div class="character-info">
+    <div class="info">
+      <div class="info-label">Name</div>
+      <div class="info-value">{{ character.name | handleNull }}</div>
+    </div>
+    <div class="info">
+      <div class="info-label">Type</div>
+      <div class="info-value">{{ character.type | handleNull }}</div>
+    </div>
+    <div class="info">
+      <div class="info-label">Gender</div>
+      <div class="info-value">{{ character.gender | handleNull }}</div>
+    </div>
+    <div class="info">
+      <div class="info-label">Species</div>
+      <div class="info-value">{{ character.species | handleNull }}</div>
+    </div>
+    <div class="info">
+      <div class="info-label">Status</div>
+      <div class="info-value">{{ character.status | handleNull }}</div>
+    </div>
+  </div>
+</div>

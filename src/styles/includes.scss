@@ -1,3 +1,20 @@
+/* COLORS */
+$black: black;
+$grey-1: #444;
+$grey-2: #aaa;
+$grey-3: #eee;
+$white: white;
+
+/* SPACING */
+$default-small-padding: 16px;
+$default-text-padding: 16px;
+$default-item-padding: 24px;
+$default-page-padding: 32px;
+
+/* OTHER VARIABLES */
+$default-radius: 16px;
+
+/* MEDIA QUERY MIXINS */
 @mixin media-query-gt-xs() {
   @media screen and (min-width: 600px) {
     @content;
@@ -22,11 +39,13 @@
   }
 }
 
-@mixin row-grid($columns, $gap: 16px) {
+/* GRID MIXINS */
+@mixin row-grid($columns, $target-width, $gap: 24px) {
   margin-right: -#{$gap};
   margin-bottom: -#{$gap};
   display: flex;
   flex-wrap: wrap;
+  max-width: $target-width * $columns;
   > * {
     width: #{100% / $columns};
     padding-right: $gap;
@@ -34,7 +53,8 @@
   }
 }
 
-@mixin row-grid-col-override($columns) {
+@mixin row-grid-col-override($columns, $target-width) {
+  max-width: $target-width * $columns;
   > * {
     width: #{100% / $columns};
   }
