@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Character } from 'src/app/shared/models/rick-api.models';
+import { ExtendedCharacter } from 'src/app/core/store';
 
 @Component({
   selector: 'app-character-info',
@@ -8,7 +8,7 @@ import { Character } from 'src/app/shared/models/rick-api.models';
 })
 export class CharacterInfoComponent implements OnInit {
   @Input()
-  character!: Character;
+  character!: ExtendedCharacter;
 
   constructor() {}
 

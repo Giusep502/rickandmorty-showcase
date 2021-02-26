@@ -2,34 +2,28 @@
 
 .character-list-page {
   padding: $default-page-padding;
-  display: flex;
-  justify-content: center;
+  margin: 0 auto;
+  display: table;
 
   .character-list {
-    @include row-grid(1, 320px);
-  }
-
-  @include media-query-gt-xs {
-    .character-list {
-      @include row-grid-col-override(2, 320px);
-    }
+    @include row-grid(1, 400px);
   }
 
   @include media-query-gt-sm {
     .character-list {
-      @include row-grid-col-override(3, 320px);
+      @include row-grid-col-override(2, 400px);
     }
   }
 
   @include media-query-gt-md {
     .character-list {
-      @include row-grid-col-override(4, 320px);
+      @include row-grid-col-override(3, 400px);
     }
   }
 
   @include media-query-gt-lg {
     .character-list {
-      @include row-grid-col-override(5, 320px);
+      @include row-grid-col-override(4, 400px);
     }
   }
 }

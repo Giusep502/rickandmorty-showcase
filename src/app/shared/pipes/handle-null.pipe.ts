@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'handleNull',
 })
 export class HandleNullPipe implements PipeTransform {
-  transform(value: string): string {
+  transform(value: string | undefined): string {
     return value || '-';
   }
 }

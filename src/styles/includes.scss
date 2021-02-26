@@ -8,6 +8,7 @@ $white: white;
 /* SPACING */
 $default-small-padding: 16px;
 $default-text-padding: 16px;
+$default-text-small-padding: 8px;
 $default-item-padding: 24px;
 $default-page-padding: 32px;
 
@@ -46,6 +47,7 @@ $default-radius: 16px;
   display: flex;
   flex-wrap: wrap;
   max-width: $target-width * $columns;
+  align-self: stretch;
   > * {
     width: #{100% / $columns};
     padding-right: $gap;

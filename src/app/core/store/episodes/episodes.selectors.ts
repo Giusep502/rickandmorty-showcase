@@ -10,11 +10,6 @@ export const selectEpisodesData = createSelector(
   (episodesState) => episodesState && episodesState.episodesData
 );
 
-export const selectEpisodesInfo = createSelector(
-  selectEpisodesState,
-  (episodesState) => episodesState && episodesState.episodesInfos
-);
-
 export const selectEpisodesLoadedIds = createSelector(
   selectEpisodesData,
   (episodesData) => Object.keys(episodesData)

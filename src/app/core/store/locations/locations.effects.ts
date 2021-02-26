@@ -13,10 +13,9 @@ import {
 import { AppState } from '..';
 import { RickAndMortyApiService } from '../../services/rick-and-morty-api.service';
 import {
-  LoadLocations,
-  LoadLocationsError,
-  LoadLocationsSuccess,
-  LocationsActionTypes,
+  loadLocations,
+  loadLocationsError,
+  loadLocationsSuccess,
 } from './locations.actions';
 import { selectLocationsLoadedIds } from './locations.selectors';
 
@@ -30,16 +29,15 @@ export class LocationsEffects {
 
   loadLocations$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
-      ofType(LocationsActionTypes.LoadLocations),
-      map((action) => action as LoadLocations),
+      ofType(loadLocations),
       withLatestFrom(this.store.pipe(select(selectLocationsLoadedIds))),
       map(([action, locationIds]) =>
-        action.payload.ids.filter((id) => !locationIds.includes(id))
+        action.ids.filter((id) => !locationIds.includes(id))
       ),
       filter((ids) => ids.length > 0),
-      switchMap((ids) => this.rickAndMortyApi.getLocations({ ids })),
-      map((locationsData) => new LoadLocationsSuccess({ locationsData })),
-      catchError(() => of(new LoadLocationsError()))
+      switchMap((ids) => this.rickAndMortyApi.getLocationsByIds(ids)),
+      map((locationsData) => loadLocationsSuccess({ locationsData })),
+      catchError(() => of(loadLocationsError()))
     )
   );
 }

@@ -5,7 +5,7 @@ import {
   Character,
   DefaultResponse,
   Episode,
-  Location,
+  WorldLocation,
 } from 'src/app/shared/models/rick-api.models';
 import { environment } from 'src/environments/environment';
 
@@ -19,30 +19,18 @@ export class RickAndMortyApiService {
     return `${environment.apiBaseUrl}api/${apiName}/${ids.join(',')}`;
   }
 
-  getCharacters(info: {
-    page?: string;
-    ids?: string[];
-  }): Observable<DefaultResponse<Character>> {
-    const url = this.calculateApiUrl(info.ids || [], 'character');
-    const params = !!info.page ? { page: info.page } : undefined;
-    return this.http.get<DefaultResponse<Character>>(url, { params });
+  getCharactersByPage(page: string): Observable<DefaultResponse<Character>> {
+    const url = this.calculateApiUrl([], 'character');
+    return this.http.get<DefaultResponse<Character>>(url, { params: { page } });
   }
 
-  getLocations(info: {
-    page?: string;
-    ids?: string[];
-  }): Observable<DefaultResponse<Location>> {
-    const url = this.calculateApiUrl(info.ids || [], 'location');
-    const params = !!info.page ? { page: info.page } : undefined;
-    return this.http.get<DefaultResponse<Location>>(url, { params });
+  getLocationsByIds(ids: string[]): Observable<WorldLocation[]> {
+    const url = this.calculateApiUrl(ids, 'location');
+    return this.http.get<WorldLocation[]>(url);
   }
 
-  getEpisodes(info: {
-    page?: string;
-    ids?: string[];
-  }): Observable<DefaultResponse<Episode>> {
-    const url = this.calculateApiUrl(info.ids || [], 'episode');
-    const params = !!info.page ? { page: info.page } : undefined;
-    return this.http.get<DefaultResponse<Episode>>(url, { params });
+  getEpisodesByIds(ids: string[]): Observable<Episode[]> {
+    const url = this.calculateApiUrl(ids, 'episode');
+    return this.http.get<Episode[]>(url);
   }
 }

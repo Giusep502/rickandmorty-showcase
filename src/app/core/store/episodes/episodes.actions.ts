@@ -1,32 +1,22 @@
-import { Action } from '@ngrx/store';
-import {
-  DefaultResponse,
-  Episode,
-} from 'src/app/shared/models/rick-api.models';
+import { createAction, props } from '@ngrx/store';
+import { Episode } from 'src/app/shared/models/rick-api.models';
 
 export enum EpisodesActionTypes {
   LoadEpisodes = '[Episodes] Load Episodes',
-  LoadEpisodesSuccess = '[Episodes] Load Episodes',
-  LoadEpisodesError = '[Episodes] Load Episodes',
+  LoadEpisodesSuccess = '[Episodes] Load Episodes Success',
+  LoadEpisodesError = '[Episodes] Load Episodes Error',
 }
 
-export class LoadEpisodes implements Action {
-  readonly type = EpisodesActionTypes.LoadEpisodes;
+export const loadEpisodes = createAction(
+  EpisodesActionTypes.LoadEpisodes,
+  props<{ ids: string[] }>()
+);
 
-  constructor(public payload: { ids: string[] }) {}
-}
+export const loadEpisodesSuccess = createAction(
+  EpisodesActionTypes.LoadEpisodesSuccess,
+  props<{ episodesData: Episode[] }>()
+);
 
-export class LoadEpisodesSuccess implements Action {
-  readonly type = EpisodesActionTypes.LoadEpisodesSuccess;
-
-  constructor(public payload: { episodesData: DefaultResponse<Episode> }) {}
-}
-
-export class LoadEpisodesError implements Action {
-  readonly type = EpisodesActionTypes.LoadEpisodesError;
-}
-
-export type EpisodesActions =
-  | LoadEpisodes
-  | LoadEpisodesSuccess
-  | LoadEpisodesError;
+export const loadEpisodesError = createAction(
+  EpisodesActionTypes.LoadEpisodesError
+);

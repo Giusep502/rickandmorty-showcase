@@ -13,10 +13,9 @@ import {
 import { AppState } from '..';
 import { RickAndMortyApiService } from '../../services/rick-and-morty-api.service';
 import {
-  LoadEpisodes,
-  LoadEpisodesError,
-  LoadEpisodesSuccess,
-  EpisodesActionTypes,
+  loadEpisodes,
+  loadEpisodesError,
+  loadEpisodesSuccess,
 } from './episodes.actions';
 import { selectEpisodesLoadedIds } from './episodes.selectors';
 
@@ -30,16 +29,15 @@ export class EpisodesEffects {
 
   loadEpisodes$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
-      ofType(EpisodesActionTypes.LoadEpisodes),
-      map((action) => action as LoadEpisodes),
+      ofType(loadEpisodes),
       withLatestFrom(this.store.pipe(select(selectEpisodesLoadedIds))),
       map(([action, episodeIds]) =>
-        action.payload.ids.filter((id) => !episodeIds.includes(id))
+        action.ids.filter((id) => !episodeIds.includes(id))
       ),
       filter((ids) => ids.length > 0),
-      switchMap((ids) => this.rickAndMortyApi.getEpisodes({ ids })),
-      map((episodesData) => new LoadEpisodesSuccess({ episodesData })),
-      catchError(() => of(new LoadEpisodesError()))
+      switchMap((ids) => this.rickAndMortyApi.getEpisodesByIds(ids)),
+      map((episodesData) => loadEpisodesSuccess({ episodesData })),
+      catchError(() => of(loadEpisodesError()))
     )
   );
 }

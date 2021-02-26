@@ -35,7 +35,7 @@ export interface Character {
   created: string;
 }
 
-export interface Location {
+export interface WorldLocation {
   id: number;
   name: string;
   type: string;

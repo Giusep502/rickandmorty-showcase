@@ -5,24 +5,29 @@
   flex-direction: column;
   border-radius: $default-radius;
   overflow: hidden;
+  height: 100%;
   background-color: $grey-1;
-  max-width: 315px;
 
   .image {
     display: flex;
     overflow: hidden;
     align-items: center;
     justify-content: center;
-    max-height: 200px;
+    height: 200px;
     img {
       flex-grow: 1;
     }
   }
   .character-info {
     padding: $default-item-padding;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     .info {
       display: flex;
       justify-content: space-between;
+      padding-bottom: $default-text-small-padding;
       .info-label {
         color: $grey-2;
       }
@@ -30,9 +35,6 @@
         text-align: right;
         padding-left: $default-text-padding;
         color: $white;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
       }
     }
   }

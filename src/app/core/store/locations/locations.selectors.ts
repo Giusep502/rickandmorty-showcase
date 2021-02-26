@@ -10,11 +10,6 @@ export const selectLocationsData = createSelector(
   (locationsState) => locationsState && locationsState.locationsData
 );
 
-export const selectLocationsInfo = createSelector(
-  selectLocationsState,
-  (locationsState) => locationsState && locationsState.locationsInfos
-);
-
 export const selectLocationsLoadedIds = createSelector(
   selectLocationsData,
   (locationsData) => Object.keys(locationsData)

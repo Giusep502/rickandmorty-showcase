@@ -1,39 +1,42 @@
+import { createReducer, on } from '@ngrx/store';
 import { LocationsState } from '..';
 import {
-  LoadLocationsSuccess,
-  LocationsActions,
-  LocationsActionTypes,
+  loadLocations,
+  loadLocationsSuccess,
+  loadLocationsError,
 } from './locations.actions';
 
-export function locationsReducers(
-  state: LocationsState,
-  action: LocationsActions
-): LocationsState {
-  switch (action.type) {
-    case LocationsActionTypes.LoadLocations:
-      return {
-        ...state,
-        loading: true,
-        error: false,
-      };
-    case LocationsActionTypes.LoadLocationsSuccess:
-      return {
-        loading: false,
-        error: false,
-        locationsData: {
-          ...(state || {}).locationsData,
-          ...(action as LoadLocationsSuccess).payload.locationsData.results.reduce(
-            (accumulator, location) => ({
-              ...accumulator,
-              [location.id]: location,
-            }),
-            {}
-          ),
-        },
-        locationsInfos: (action as LoadLocationsSuccess).payload.locationsData
-          .info,
-      };
-    case LocationsActionTypes.LoadLocationsError:
-      return { ...state, loading: false, error: true };
-  }
-}
+const initialState: LocationsState = {
+  loading: false,
+  error: false,
+  locationsData: {},
+};
+
+export const locationsReducers = createReducer(
+  initialState,
+  on(loadLocations, (state) => ({
+    ...state,
+    loading: true,
+    error: false,
+  })),
+  on(loadLocationsSuccess, (state, props) => ({
+    ...state,
+    loading: false,
+    error: false,
+    locationsData: {
+      ...state.locationsData,
+      ...props.locationsData.reduce(
+        (accumulator, location) => ({
+          ...accumulator,
+          [location.id]: location,
+        }),
+        {}
+      ),
+    },
+  })),
+  on(loadLocationsError, (state) => ({
+    ...state,
+    loading: false,
+    error: true,
+  }))
+);

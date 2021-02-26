@@ -1,32 +1,22 @@
-import { Action } from '@ngrx/store';
-import {
-  DefaultResponse,
-  Location,
-} from 'src/app/shared/models/rick-api.models';
+import { createAction, props } from '@ngrx/store';
+import { WorldLocation } from 'src/app/shared/models/rick-api.models';
 
 export enum LocationsActionTypes {
   LoadLocations = '[Locations] Load Locations',
-  LoadLocationsSuccess = '[Locations] Load Locations',
-  LoadLocationsError = '[Locations] Load Locations',
+  LoadLocationsSuccess = '[Locations] Load Locations Success',
+  LoadLocationsError = '[Locations] Load Locations Error',
 }
 
-export class LoadLocations implements Action {
-  readonly type = LocationsActionTypes.LoadLocations;
+export const loadLocations = createAction(
+  LocationsActionTypes.LoadLocations,
+  props<{ ids: string[] }>()
+);
 
-  constructor(public payload: { ids: string[] }) {}
-}
+export const loadLocationsSuccess = createAction(
+  LocationsActionTypes.LoadLocationsSuccess,
+  props<{ locationsData: WorldLocation[] }>()
+);
 
-export class LoadLocationsSuccess implements Action {
-  readonly type = LocationsActionTypes.LoadLocationsSuccess;
-
-  constructor(public payload: { locationsData: DefaultResponse<Location> }) {}
-}
-
-export class LoadLocationsError implements Action {
-  readonly type = LocationsActionTypes.LoadLocationsError;
-}
-
-export type LocationsActions =
-  | LoadLocations
-  | LoadLocationsSuccess
-  | LoadLocationsError;
+export const loadLocationsError = createAction(
+  LocationsActionTypes.LoadLocationsError
+);

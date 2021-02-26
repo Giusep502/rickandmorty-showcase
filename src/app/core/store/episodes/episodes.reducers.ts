@@ -1,39 +1,42 @@
+import { createReducer, on } from '@ngrx/store';
 import { EpisodesState } from '..';
 import {
-  LoadEpisodesSuccess,
-  EpisodesActions,
-  EpisodesActionTypes,
+  loadEpisodes,
+  loadEpisodesSuccess,
+  loadEpisodesError,
 } from './episodes.actions';
 
-export function episodesReducers(
-  state: EpisodesState,
-  action: EpisodesActions
-): EpisodesState {
-  switch (action.type) {
-    case EpisodesActionTypes.LoadEpisodes:
-      return {
-        ...state,
-        loading: true,
-        error: false,
-      };
-    case EpisodesActionTypes.LoadEpisodesSuccess:
-      return {
-        loading: false,
-        error: false,
-        episodesData: {
-          ...(state || {}).episodesData,
-          ...(action as LoadEpisodesSuccess).payload.episodesData.results.reduce(
-            (accumulator, episode) => ({
-              ...accumulator,
-              [episode.id]: episode,
-            }),
-            {}
-          ),
-        },
-        episodesInfos: (action as LoadEpisodesSuccess).payload.episodesData
-          .info,
-      };
-    case EpisodesActionTypes.LoadEpisodesError:
-      return { ...state, loading: false, error: true };
-  }
-}
+const initialState: EpisodesState = {
+  loading: false,
+  error: false,
+  episodesData: {},
+};
+
+export const episodesReducers = createReducer(
+  initialState,
+  on(loadEpisodes, (state) => ({
+    ...state,
+    loading: true,
+    error: false,
+  })),
+  on(loadEpisodesSuccess, (state, props) => ({
+    ...state,
+    loading: false,
+    error: false,
+    episodesData: {
+      ...state.episodesData,
+      ...props.episodesData.reduce(
+        (accumulator, episode) => ({
+          ...accumulator,
+          [episode.id]: episode,
+        }),
+        {}
+      ),
+    },
+  })),
+  on(loadEpisodesError, (state) => ({
+    ...state,
+    loading: false,
+    error: true,
+  }))
+);

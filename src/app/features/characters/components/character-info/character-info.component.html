@@ -23,5 +23,43 @@
       <div class="info-label">Status</div>
       <div class="info-value">{{ character.status | handleNull }}</div>
     </div>
+    <div class="info">
+      <div class="info-label">Origin</div>
+      <div
+        class="info-value"
+        *ngIf="character.extendedOrigin as originInfo; else baseOrigin"
+      >
+        {{ originInfo.name | handleNull }} <br />
+        <i>type: </i>{{ originInfo.type | handleNull }} <br />
+        <i>dimension: </i>{{ originInfo.dimension | handleNull }}
+      </div>
+    </div>
+    <div class="info">
+      <div class="info-label">Location</div>
+      <div
+        class="info-value"
+        *ngIf="character.extendedLocation as locationInfo; else baseLocation"
+      >
+        {{ locationInfo.name | handleNull }} <br />
+        <i>type: </i>{{ locationInfo.type | handleNull }} <br />
+        <i>dimension: </i>{{ locationInfo.dimension | handleNull }}
+      </div>
+    </div>
+    <div class="info" *ngIf="character.extendedEpisodes as episodesInfo">
+      <div class="info-label">Episodes</div>
+      <div class="info-value">
+        <ng-container *ngFor="let episode of episodesInfo"
+          >{{ episode.name | handleNull }} <br
+        /></ng-container>
+      </div>
+    </div>
   </div>
 </div>
+
+<ng-template #baseLocation>
+  <div class="info-value">{{ character.location.name | handleNull }}</div>
+</ng-template>
+
+<ng-template #baseOrigin>
+  <div class="info-value">{{ character.origin.name | handleNull }}</div>
+</ng-template>

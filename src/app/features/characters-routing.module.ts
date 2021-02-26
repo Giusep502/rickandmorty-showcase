@@ -4,7 +4,7 @@ import { CharacterListPageComponent } from './characters/containers/character-li
 
 const routes: Routes = [
   {
-    path: ':id',
+    path: ':page',
     component: CharacterListPageComponent,
   },
 ];
