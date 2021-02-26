@@ -30,10 +30,10 @@ const createCharactersData = (results: Character[]) => ({
     results.reduce(
       (accumulator: string[], character) => [
         ...accumulator,
-        ...(character.location.name !== 'unknown'
+        ...(!!character.location.url
           ? [getIdFromLink(character.location.url)]
           : []),
-        ...(character.origin.name !== 'unknown'
+        ...(!!character.origin.url
           ? [getIdFromLink(character.origin.url)]
           : []),
       ],
