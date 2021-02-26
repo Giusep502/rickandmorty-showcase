@@ -5,5 +5,10 @@
       [character]="character"
     ></app-character-info>
   </div>
+  <img
+    src="assets/error.png"
+    *ngIf="charactersError$ | async"
+    (click)="goToPage(1)"
+  />
   <button (click)="nextPage()">Change Page</button>
 </div>

@@ -22,15 +22,13 @@ export class CharactersEffects {
     this.actions$.pipe(
       ofType(loadCharacters),
       switchMap((action) =>
-        this.rickAndMortyApi
-          .getCharactersByPage(action.page + '')
-          .pipe(
-            map((charactersData) =>
-              loadCharactersSuccess({ charactersData, page: action.page })
-            )
-          )
-      ),
-      catchError(() => of(loadCharactersError()))
+        this.rickAndMortyApi.getCharactersByPage(action.page + '').pipe(
+          map((charactersData) =>
+            loadCharactersSuccess({ charactersData, page: action.page })
+          ),
+          catchError(() => of(loadCharactersError()))
+        )
+      )
     )
   );
 }

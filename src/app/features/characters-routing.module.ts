@@ -1,11 +1,18 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {
+  ActivatedRoute,
+  ActivatedRouteSnapshot,
+  RouterModule,
+  Routes,
+} from '@angular/router';
+import { CharacterPageGuard } from './characters/character-page.guard';
 import { CharacterListPageComponent } from './characters/containers/character-list-page/character-list-page.component';
 
 const routes: Routes = [
   {
     path: ':page',
     component: CharacterListPageComponent,
+    canActivate: [CharacterPageGuard],
   },
 ];
 

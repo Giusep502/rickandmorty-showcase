@@ -35,9 +35,12 @@ export class EpisodesEffects {
         action.ids.filter((id) => !episodeIds.includes(id))
       ),
       filter((ids) => ids.length > 0),
-      switchMap((ids) => this.rickAndMortyApi.getEpisodesByIds(ids)),
-      map((episodesData) => loadEpisodesSuccess({ episodesData })),
-      catchError(() => of(loadEpisodesError()))
+      switchMap((ids) =>
+        this.rickAndMortyApi.getEpisodesByIds(ids).pipe(
+          map((episodesData) => loadEpisodesSuccess({ episodesData })),
+          catchError(() => of(loadEpisodesError()))
+        )
+      )
     )
   );
 }

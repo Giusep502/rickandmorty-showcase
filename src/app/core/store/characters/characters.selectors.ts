@@ -18,6 +18,11 @@ export const selectCharactersData = createSelector(
   (charactersState) => charactersState && charactersState.charactersData
 );
 
+export const selectCharactersError = createSelector(
+  selectCharactersState,
+  (charactersState) => charactersState && charactersState.error
+);
+
 export const selectCharactersInfo = createSelector(
   selectCharactersState,
   (charactersState) => charactersState && charactersState.charactersInfos

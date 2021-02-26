@@ -35,9 +35,12 @@ export class LocationsEffects {
         action.ids.filter((id) => !locationIds.includes(id))
       ),
       filter((ids) => ids.length > 0),
-      switchMap((ids) => this.rickAndMortyApi.getLocationsByIds(ids)),
-      map((locationsData) => loadLocationsSuccess({ locationsData })),
-      catchError(() => of(loadLocationsError()))
+      switchMap((ids) =>
+        this.rickAndMortyApi.getLocationsByIds(ids).pipe(
+          map((locationsData) => loadLocationsSuccess({ locationsData })),
+          catchError(() => of(loadLocationsError()))
+        )
+      )
     )
   );
 }

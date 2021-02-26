@@ -17,6 +17,7 @@ import {
 import { AppState, ExtendedCharacter } from 'src/app/core/store';
 import { loadCharacters } from 'src/app/core/store/characters/characters.actions';
 import {
+  selectCharactersError,
   selectCharactersNeededEpisodesForPage,
   selectCharactersNeededLocationsForPage,
   selectExtendedCharactersDataForPage,
@@ -32,6 +33,7 @@ import { loadLocations } from 'src/app/core/store/locations/locations.actions';
 })
 export class CharacterListPageComponent implements OnInit, OnDestroy {
   characters$: Observable<ExtendedCharacter[] | undefined>;
+  charactersError$: Observable<boolean>;
   private subscriptions = new Subscription();
 
   constructor(
@@ -52,13 +54,12 @@ export class CharacterListPageComponent implements OnInit, OnDestroy {
         )
       )
     );
+    this.charactersError$ = this.store.pipe(select(selectCharactersError));
   }
 
   ngOnInit(): void {
     this.activatedRoute.params
       .pipe(
-        tap((params) => isNaN(params.page) && this.goToPage(1)),
-        filter((params) => !isNaN(params.page)),
         switchMap((params) =>
           combineLatest([
             this.store.pipe(
