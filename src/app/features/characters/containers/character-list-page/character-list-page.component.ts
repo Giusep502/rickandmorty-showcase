@@ -65,28 +65,30 @@ export class CharacterListPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.params
-      .pipe(
-        switchMap((params) =>
-          combineLatest([
-            this.store.pipe(
-              select(selectCharactersNeededEpisodesForPage, params.page),
-              filter((episodes) => !!episodes && episodes.length > 0),
-              tap((episodes) =>
-                this.store.dispatch(loadEpisodes({ ids: episodes }))
-              )
-            ),
-            this.store.pipe(
-              select(selectCharactersNeededLocationsForPage, params.page),
-              filter((locations) => !!locations && locations.length > 0),
-              tap((locations) =>
-                this.store.dispatch(loadLocations({ ids: locations }))
-              )
-            ),
-          ])
+    this.subscriptions.add(
+      this.activatedRoute.params
+        .pipe(
+          switchMap((params) =>
+            combineLatest([
+              this.store.pipe(
+                select(selectCharactersNeededEpisodesForPage, params.page),
+                filter((episodes) => !!episodes && episodes.length > 0),
+                tap((episodes) =>
+                  this.store.dispatch(loadEpisodes({ ids: episodes }))
+                )
+              ),
+              this.store.pipe(
+                select(selectCharactersNeededLocationsForPage, params.page),
+                filter((locations) => !!locations && locations.length > 0),
+                tap((locations) =>
+                  this.store.dispatch(loadLocations({ ids: locations }))
+                )
+              ),
+            ])
+          )
         )
-      )
-      .subscribe();
+        .subscribe()
+    );
   }
 
   ngOnDestroy(): void {
