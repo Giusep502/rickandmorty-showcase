@@ -6,6 +6,6 @@ import { HandleNullPipe } from './pipes/handle-null.pipe';
 @NgModule({
   declarations: [PaginatorComponent, HandleNullPipe],
   imports: [CommonModule],
-  exports: [HandleNullPipe, PaginatorComponent],
+  exports: [HandleNullPipe, PaginatorComponent, CommonModule],
 })
 export class SharedModule {}

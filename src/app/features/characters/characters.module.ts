@@ -3,10 +3,9 @@ import { CharactersRoutingModule } from './characters-routing.module';
 import { CharacterInfoComponent } from './components/character-info/character-info.component';
 import { CharacterListPageComponent } from './containers/character-list-page/character-list-page.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [CharacterInfoComponent, CharacterListPageComponent],
-  imports: [CommonModule, CharactersRoutingModule, SharedModule],
+  imports: [CharactersRoutingModule, SharedModule],
 })
 export class CharactersModule {}
