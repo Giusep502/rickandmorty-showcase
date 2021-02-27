@@ -7,13 +7,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { combineLatest, Observable, Subscription } from 'rxjs';
-import {
-  distinctUntilChanged,
-  filter,
-  map,
-  switchMap,
-  tap,
-} from 'rxjs/operators';
+import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { AppState, ExtendedCharacter } from 'src/app/core/store';
 import { loadCharacters } from 'src/app/core/store/characters/characters.actions';
 import {
@@ -77,7 +71,6 @@ export class CharacterListPageComponent implements OnInit, OnDestroy {
           combineLatest([
             this.store.pipe(
               select(selectCharactersNeededEpisodesForPage, params.page),
-              distinctUntilChanged(),
               filter((episodes) => !!episodes && episodes.length > 0),
               tap((episodes) =>
                 this.store.dispatch(loadEpisodes({ ids: episodes }))
@@ -85,7 +78,6 @@ export class CharacterListPageComponent implements OnInit, OnDestroy {
             ),
             this.store.pipe(
               select(selectCharactersNeededLocationsForPage, params.page),
-              distinctUntilChanged(),
               filter((locations) => !!locations && locations.length > 0),
               tap((locations) =>
                 this.store.dispatch(loadLocations({ ids: locations }))
