@@ -31,7 +31,8 @@
       >
         {{ originInfo.name | handleNull }} <br />
         <i>type: </i>{{ originInfo.type | handleNull }} <br />
-        <i>dimension: </i>{{ originInfo.dimension | handleNull }}
+        <i>dimension: </i>{{ originInfo.dimension | handleNull }} <br />
+        <i>residents: </i>{{ originInfo.residents.length }}
       </div>
     </div>
     <div class="info">
@@ -42,7 +43,8 @@
       >
         {{ locationInfo.name | handleNull }} <br />
         <i>type: </i>{{ locationInfo.type | handleNull }} <br />
-        <i>dimension: </i>{{ locationInfo.dimension | handleNull }}
+        <i>dimension: </i>{{ locationInfo.dimension | handleNull }} <br />
+        <i>residents: </i>{{ locationInfo.residents.length }}
       </div>
     </div>
     <div class="info" *ngIf="character.extendedEpisodes as episodesInfo">
