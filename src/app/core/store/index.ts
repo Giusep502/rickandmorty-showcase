@@ -12,8 +12,8 @@ import { LocationsEffects } from './locations/locations.effects';
 import { locationsReducers } from './locations/locations.reducers';
 
 export interface ExtendedCharacter extends Character {
-  extendedLocation: WorldLocation;
-  extendedOrigin: WorldLocation;
+  extendedLocation?: WorldLocation;
+  extendedOrigin?: WorldLocation;
   extendedEpisodes: Episode[];
 }
 

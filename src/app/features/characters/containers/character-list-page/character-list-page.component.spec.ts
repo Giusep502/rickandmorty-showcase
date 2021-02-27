@@ -93,7 +93,7 @@ describe('CharacterListPageComponent', () => {
         extendedLocation: undefined,
         extendedOrigin: undefined,
         extendedEpisodes: [],
-      } as any);
+      });
       done();
     });
   });
@@ -112,7 +112,7 @@ describe('CharacterListPageComponent', () => {
         extendedLocation: exampleLocation,
         extendedOrigin: undefined,
         extendedEpisodes: [exampleEpisode],
-      } as any);
+      });
       done();
     });
   });

@@ -21,7 +21,7 @@ describe('Characters Selectors', () => {
         extendedLocation: exampleLocation,
         extendedOrigin: undefined,
         extendedEpisodes: [exampleEpisode],
-      } as any,
+      },
     ]);
   });
 });
