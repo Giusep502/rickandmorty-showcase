@@ -2,10 +2,9 @@
 
 .paginator-container {
   display: flex;
-  justify-content: space-between;
 
   > div {
-    flex-grow: 1;
+    width: 50%;
     &.next {
       text-align: right;
     }
