@@ -48,9 +48,16 @@
     <div class="info" *ngIf="character.extendedEpisodes as episodesInfo">
       <div class="info-label">Episodes</div>
       <div class="info-value">
-        <ng-container *ngFor="let episode of episodesInfo"
+        <ng-container
+          *ngFor="let episode of episodesInfo | slice: 0:maxEpisodes"
           >{{ episode.name | handleNull }} <br
         /></ng-container>
+        <span
+          class="caption link"
+          (click)="showMoreEpisodes()"
+          *ngIf="episodesInfo.length > maxEpisodes"
+          >show more</span
+        >
       </div>
     </div>
   </div>

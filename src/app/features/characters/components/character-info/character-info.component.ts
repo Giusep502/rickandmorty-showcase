@@ -16,7 +16,13 @@ export class CharacterInfoComponent implements OnInit {
   @Input()
   character!: ExtendedCharacter;
 
+  maxEpisodes = 4;
+
   constructor() {}
 
   ngOnInit(): void {}
+
+  showMoreEpisodes(): void {
+    this.maxEpisodes += 4;
+  }
 }
