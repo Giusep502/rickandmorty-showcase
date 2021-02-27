@@ -9,6 +9,7 @@ import { CharacterListPageComponent } from './character-list-page.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
   exampleCharacter,
+  exampleCharactersErrorState,
   exampleEpisode,
   exampleInitialAppState,
   exampleInitialAppStateComplete,
@@ -70,7 +71,7 @@ describe('CharacterListPageComponent', () => {
     ).toBeTruthy();
     expect(
       fixture.debugElement.query(
-        (el) => el.nativeElement.src === 'assets/error.png'
+        (el) => el.nativeElement.getAttribute('src') === 'assets/error.png'
       )
     ).toBeFalsy();
   });
@@ -121,5 +122,19 @@ describe('CharacterListPageComponent', () => {
     spyOn(router, 'navigate');
     component.goToPage(2);
     expect(router.navigate).toHaveBeenCalledWith(['characters', 2]);
+  });
+
+  it('should handle error', () => {
+    store.setState(exampleCharactersErrorState);
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('.character-card'))).toBeFalsy();
+    expect(
+      fixture.debugElement.query(By.css('.paginator-container'))
+    ).toBeFalsy();
+    expect(
+      fixture.debugElement.query(
+        (el) => el.nativeElement.getAttribute('src') === 'assets/error.png'
+      )
+    ).toBeTruthy();
   });
 });

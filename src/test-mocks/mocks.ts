@@ -7,6 +7,13 @@ import {
   CharacterStatus,
 } from 'src/app/shared/models/rick-api.models';
 
+export const exampleInfos = {
+  count: 1,
+  pages: 34,
+  next: '',
+  prev: '',
+};
+
 export const exampleEpisode = {
   id: 9,
   name: 'Rixty Minutes',
@@ -74,12 +81,7 @@ export const exampleInitialAppState: AppState = {
         neededLocationIds: [],
       },
     },
-    charactersInfos: {
-      count: 1,
-      pages: 34,
-      next: '',
-      prev: '',
-    },
+    charactersInfos: exampleInfos,
   },
 };
 
@@ -111,5 +113,14 @@ export const exampleInitialAppStateComplete: AppState = {
       next: '',
       prev: '',
     },
+  },
+};
+
+export const exampleCharactersErrorState: AppState = {
+  locations: initialLocationState,
+  episodes: initialEpisodesState,
+  characters: {
+    ...initialCharactersState,
+    error: true,
   },
 };
