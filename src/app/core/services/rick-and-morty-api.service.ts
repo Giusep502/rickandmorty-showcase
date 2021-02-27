@@ -28,7 +28,7 @@ export class RickAndMortyApiService {
   getLocationsByIds(ids: string[]): Observable<WorldLocation[]> {
     const url = this.calculateApiUrl(ids, 'location');
     return this.http
-      .get<WorldLocation[]>(url)
+      .get<WorldLocation[] | WorldLocation>(url)
       .pipe(
         map((response) => (Array.isArray(response) ? response : [response]))
       );
