@@ -6,7 +6,7 @@ import {
   loadEpisodesError,
 } from './episodes.actions';
 
-const initialState: EpisodesState = {
+export const initialState: EpisodesState = {
   loading: false,
   error: false,
   episodesData: {},

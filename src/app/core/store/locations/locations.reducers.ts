@@ -6,7 +6,7 @@ import {
   loadLocationsError,
 } from './locations.actions';
 
-const initialState: LocationsState = {
+export const initialState: LocationsState = {
   loading: false,
   error: false,
   locationsData: {},

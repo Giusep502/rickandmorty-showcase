@@ -50,10 +50,11 @@
     <div class="info" *ngIf="character.extendedEpisodes as episodesInfo">
       <div class="info-label">Episodes</div>
       <div class="info-value">
-        <ng-container
+        <span
+          class="episode"
           *ngFor="let episode of episodesInfo | slice: 0:maxEpisodes"
-          >{{ episode.name | handleNull }} <br
-        /></ng-container>
+          >{{ episode.name | handleNull }}</span
+        >
         <span
           class="caption link"
           (click)="showMoreEpisodes()"
@@ -66,9 +67,9 @@
 </div>
 
 <ng-template #baseLocation>
-  <div class="info-value">{{ character.location.name | handleNull }}</div>
+  <div class="info-value">{{ character.location?.name | handleNull }}</div>
 </ng-template>
 
 <ng-template #baseOrigin>
-  <div class="info-value">{{ character.origin.name | handleNull }}</div>
+  <div class="info-value">{{ character.origin?.name | handleNull }}</div>
 </ng-template>

@@ -14,7 +14,7 @@ import { ExtendedCharacter } from 'src/app/core/store';
 })
 export class CharacterInfoComponent implements OnInit {
   @Input()
-  character!: ExtendedCharacter;
+  character!: Partial<ExtendedCharacter>;
 
   maxEpisodes = 4;
 

@@ -8,7 +8,7 @@ import {
   loadCharactersSuccess,
 } from './characters.actions';
 
-const initialState: CharactersState = {
+export const initialState: CharactersState = {
   loading: false,
   error: false,
   charactersPageData: {},

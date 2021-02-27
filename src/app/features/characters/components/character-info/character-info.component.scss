@@ -35,6 +35,13 @@
         text-align: right;
         padding-left: $default-text-padding;
         color: $white;
+        overflow: hidden;
+        .episode {
+          display: block;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
     }
   }
