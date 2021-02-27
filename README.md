@@ -22,6 +22,8 @@ Run `test:coverage` with npm to run tests and check the code coverage
 
 Run `prettify` with npm to fix code formatting on changed files.
 
+Run `lint` with npm to lint code.
+
 ## Notes
 
 E2E Tests with Protractor are not available yet
