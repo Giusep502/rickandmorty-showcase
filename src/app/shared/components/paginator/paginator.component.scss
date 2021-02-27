@@ -1,0 +1,18 @@
+@import "~src/styles/includes.scss";
+
+.paginator-container {
+  display: flex;
+  justify-content: space-between;
+
+  > div {
+    flex-grow: 1;
+    &.next {
+      text-align: right;
+    }
+  }
+
+  > span {
+    color: $grey-2;
+    flex-shrink: 0;
+  }
+}

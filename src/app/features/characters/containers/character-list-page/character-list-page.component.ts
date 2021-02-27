@@ -10,20 +10,22 @@ import { combineLatest, Observable, Subscription } from 'rxjs';
 import {
   distinctUntilChanged,
   filter,
+  map,
   switchMap,
-  take,
   tap,
 } from 'rxjs/operators';
 import { AppState, ExtendedCharacter } from 'src/app/core/store';
 import { loadCharacters } from 'src/app/core/store/characters/characters.actions';
 import {
   selectCharactersError,
+  selectCharactersInfo,
   selectCharactersNeededEpisodesForPage,
   selectCharactersNeededLocationsForPage,
   selectExtendedCharactersDataForPage,
 } from 'src/app/core/store/characters/characters.selectors';
 import { loadEpisodes } from 'src/app/core/store/episodes/episodes.actions';
 import { loadLocations } from 'src/app/core/store/locations/locations.actions';
+import { Infos } from 'src/app/shared/models/rick-api.models';
 
 @Component({
   selector: 'app-character-list-page',
@@ -34,6 +36,7 @@ import { loadLocations } from 'src/app/core/store/locations/locations.actions';
 export class CharacterListPageComponent implements OnInit, OnDestroy {
   characters$: Observable<ExtendedCharacter[] | undefined>;
   charactersError$: Observable<boolean>;
+  pagesInfo$: Observable<{ totalPages: number; currentPage: number }>;
   private subscriptions = new Subscription();
 
   constructor(
@@ -42,7 +45,7 @@ export class CharacterListPageComponent implements OnInit, OnDestroy {
     private router: Router
   ) {
     this.characters$ = this.activatedRoute.params.pipe(
-      tap(() => window.scrollTo({ top: 0, behavior: 'smooth' })),
+      tap(() => window.scrollTo({ top: 0 })),
       switchMap((params) =>
         this.store.pipe(
           select(selectExtendedCharactersDataForPage, params.page),
@@ -55,6 +58,16 @@ export class CharacterListPageComponent implements OnInit, OnDestroy {
       )
     );
     this.charactersError$ = this.store.pipe(select(selectCharactersError));
+    this.pagesInfo$ = combineLatest([
+      this.activatedRoute.params,
+      this.store.pipe(select(selectCharactersInfo)),
+    ]).pipe(
+      filter(([params, infos]) => !!params.page && !!infos),
+      map(([params, infos]) => ({
+        totalPages: (infos as Infos).pages,
+        currentPage: +params.page,
+      }))
+    );
   }
 
   ngOnInit(): void {
@@ -86,10 +99,6 @@ export class CharacterListPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
-  }
-
-  nextPage(): void {
-    this.goToPage(+this.activatedRoute.snapshot.params.page + 1);
   }
 
   goToPage(page: number): void {

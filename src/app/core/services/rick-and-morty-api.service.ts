@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
+import { map } from 'rxjs/operators';
 import {
   Character,
   DefaultResponse,
@@ -26,11 +27,19 @@ export class RickAndMortyApiService {
 
   getLocationsByIds(ids: string[]): Observable<WorldLocation[]> {
     const url = this.calculateApiUrl(ids, 'location');
-    return this.http.get<WorldLocation[]>(url);
+    return this.http
+      .get<WorldLocation[]>(url)
+      .pipe(
+        map((response) => (Array.isArray(response) ? response : [response]))
+      );
   }
 
   getEpisodesByIds(ids: string[]): Observable<Episode[]> {
     const url = this.calculateApiUrl(ids, 'episode');
-    return this.http.get<Episode[]>(url);
+    return this.http
+      .get<Episode[] | Episode>(url)
+      .pipe(
+        map((response) => (Array.isArray(response) ? response : [response]))
+      );
   }
 }

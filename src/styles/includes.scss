@@ -47,8 +47,8 @@ $default-radius: 16px;
   display: flex;
   flex-wrap: wrap;
   max-width: $target-width * $columns;
-  align-self: stretch;
   > * {
+    align-self: stretch;
     width: #{100% / $columns};
     padding-right: $gap;
     margin-bottom: $gap;

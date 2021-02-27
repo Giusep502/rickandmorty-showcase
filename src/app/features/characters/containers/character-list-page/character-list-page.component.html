@@ -1,14 +1,22 @@
 <div class="character-list-page">
-  <div class="character-list" *ngIf="characters$ | async as characters">
-    <app-character-info
-      *ngFor="let character of characters"
-      [character]="character"
-    ></app-character-info>
+  <div class="character-list">
+    <ng-container *ngIf="characters$ | async as characters">
+      <app-character-info
+        *ngFor="let character of characters"
+        [character]="character"
+      ></app-character-info>
+    </ng-container>
   </div>
   <img
     src="assets/error.png"
     *ngIf="charactersError$ | async"
     (click)="goToPage(1)"
   />
-  <button (click)="nextPage()">Change Page</button>
+  <div class="paginator" *ngIf="pagesInfo$ | async as pagesInfo">
+    <app-paginator
+      [currentPage]="pagesInfo.currentPage"
+      [totalPages]="pagesInfo.totalPages"
+      (changePage)="goToPage($event)"
+    ></app-paginator>
+  </div>
 </div>

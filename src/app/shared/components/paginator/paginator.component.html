@@ -1,1 +1,19 @@
-<p>paginator works!</p>
+<div class="paginator-container">
+  <div>
+    <span
+      class="link"
+      *ngIf="currentPage > 1"
+      (click)="changePage.emit(currentPage - 1)"
+      >previous page</span
+    >
+  </div>
+  <span>{{ currentPage }}/{{ totalPages }}</span>
+  <div class="next">
+    <span
+      class="link"
+      *ngIf="currentPage < totalPages"
+      (click)="changePage.emit(currentPage + 1)"
+      >next page</span
+    >
+  </div>
+</div>
