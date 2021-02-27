@@ -8,7 +8,6 @@ import { EffectsModule } from '@ngrx/effects';
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
     HttpClientModule,
     StoreModule.forRoot(rootReducers),
     EffectsModule.forRoot(rootEffects),

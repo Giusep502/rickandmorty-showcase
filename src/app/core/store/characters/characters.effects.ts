@@ -23,8 +23,8 @@ export class CharactersEffects {
       ofType(loadCharacters),
       switchMap((action) =>
         this.rickAndMortyApi.getCharactersByPage(action.page + '').pipe(
-          map((charactersData) =>
-            loadCharactersSuccess({ charactersData, page: action.page })
+          map((charactersPageData) =>
+            loadCharactersSuccess({ charactersPageData, page: action.page })
           ),
           catchError(() => of(loadCharactersError()))
         )

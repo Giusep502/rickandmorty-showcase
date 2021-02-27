@@ -13,9 +13,9 @@ const selectCharactersState = createFeatureSelector<AppState, CharactersState>(
   'characters'
 );
 
-export const selectCharactersData = createSelector(
+export const selectCharactersPageData = createSelector(
   selectCharactersState,
-  (charactersState) => charactersState && charactersState.charactersData
+  (charactersState) => charactersState && charactersState.charactersPageData
 );
 
 export const selectCharactersError = createSelector(
@@ -29,9 +29,9 @@ export const selectCharactersInfo = createSelector(
 );
 
 export const selectCharactersInfoForPage = createSelector(
-  selectCharactersData,
-  (charactersData: { [x: string]: CharactersInfo }, page: number) =>
-    !!charactersData && charactersData[page]
+  selectCharactersPageData,
+  (charactersPageData: { [x: string]: CharactersInfo }, page: number) =>
+    !!charactersPageData && charactersPageData[page]
 );
 
 export const selectCharactersDataForPage = createSelector(

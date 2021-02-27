@@ -17,7 +17,7 @@ export const loadCharacters = createAction(
 
 export const loadCharactersSuccess = createAction(
   CharactersActionTypes.LoadCharactersSuccess,
-  props<{ charactersData: DefaultResponse<Character>; page: number }>()
+  props<{ charactersPageData: DefaultResponse<Character>; page: number }>()
 );
 
 export const loadCharactersError = createAction(

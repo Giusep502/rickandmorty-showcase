@@ -11,11 +11,11 @@ import {
 const initialState: CharactersState = {
   loading: false,
   error: false,
-  charactersData: {},
+  charactersPageData: {},
   charactersInfos: undefined,
 };
 
-const createCharactersData = (results: Character[]) => ({
+const createCharactersPageData = (results: Character[]) => ({
   characters: results,
   neededEpisodesIds: getUniqueIds(
     results.reduce(
@@ -52,11 +52,11 @@ export const charactersReducers = createReducer(
   on(loadCharactersSuccess, (state, props) => ({
     loading: false,
     error: false,
-    charactersData: {
-      ...(state || {}).charactersData,
-      [props.page]: createCharactersData(props.charactersData.results),
+    charactersPageData: {
+      ...(state || {}).charactersPageData,
+      [props.page]: createCharactersPageData(props.charactersPageData.results),
     },
-    charactersInfos: props.charactersData.info,
+    charactersInfos: props.charactersPageData.info,
   })),
   on(loadCharactersError, (state) => ({
     ...state,

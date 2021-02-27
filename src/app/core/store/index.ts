@@ -38,7 +38,7 @@ export interface CharactersInfo {
 export interface CharactersState {
   loading: boolean;
   error: boolean;
-  charactersData: { [page: number]: CharactersInfo };
+  charactersPageData: { [page: number]: CharactersInfo };
   charactersInfos?: Infos;
 }
 
